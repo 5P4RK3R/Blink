@@ -1,0 +1,11 @@
+Metadata-Version: 2.1
+Briefcase-Version: 0.3.17
+Name: blink
+Formal-Name: Blink
+App-ID: com.blink.blink
+Version: 0.0.1
+Home-page: https://blink.com/blink
+Download-URL: https://blink.com/blink
+Author: Coroutine
+Author-email: thecoroutine@gmail.com
+Summary: An app to remind user to blink their eyes and relax
