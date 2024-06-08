@@ -1,39 +1,25 @@
-# game_app.py
-import toga
-import random
+import sys, pygame
+pygame.init()
 
-class Game(toga.App):
-    def startup(self):
-        self.main_box = toga.Box()
+size = width, height = 320, 240
+speed = [2, 2]
+black = 0, 0, 0
 
-        self.label = toga.Label('Guess a number between 1 and 100:')
-        self.input = toga.TextInput()
-        self.button = toga.Button('Submit', on_press=self.check_guess)
+screen = pygame.display.set_mode(size)
 
-        self.main_box.add(self.label)
-        self.main_box.add(self.input)
-        self.main_box.add(self.button)
+ball = pygame.image.load("intro_ball.gif")
+ballrect = ball.get_rect()
 
-        self.main_window = toga.MainWindow(title=self.formal_name)
-        self.main_window.content = self.main_box
-        self.main_window.show()
+while True:
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT: sys.exit()
 
-        self.secret_number = random.randint(1, 100)
+    ballrect = ballrect.move(speed)
+    if ballrect.left < 0 or ballrect.right > width:
+        speed[0] = -speed[0]
+    if ballrect.top < 0 or ballrect.bottom > height:
+        speed[1] = -speed[1]
 
-    def check_guess(self, widget):
-        try:
-            guess = int(self.input.value)
-            if guess == self.secret_number:
-                self.label.text = 'Congratulations! You guessed the number.'
-            elif guess < self.secret_number:
-                self.label.text = 'Too low! Try again.'
-            else:
-                self.label.text = 'Too high! Try again.'
-        except ValueError:
-            self.label.text = 'Invalid input. Enter a number between 1 and 100.'
-
-def main():
-    return Game()
-
-if __name__ == '__main__':
-    main().main_loop()
+    screen.fill(black)
+    screen.blit(ball, ballrect)
+    pygame.display.flip()
