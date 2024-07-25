@@ -146,9 +146,10 @@ while True:
 			cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 0, 255), 2)
 		cv2.putText(frame, "EAR: {:.2f}".format(ear), (300, 30),
 			cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 0, 255), 2)
+		print("Blinks: {}".format(TOTAL))
  
 	# show the frame
-	cv2.imshow("Frame", frame)
+	# cv2.imshow("Frame", frame)
 	key = cv2.waitKey(1) & 0xFF
  
 	# if the `q` key was pressed, break from the loop
