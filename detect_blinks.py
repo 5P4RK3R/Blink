@@ -61,24 +61,38 @@ predictor = dlib.shape_predictor(args["shape_predictor"])
 
 # start the video stream thread
 print("[INFO] starting video stream thread...")
-vs = FileVideoStream(args["video"]).start()
-fileStream = True
+# vs = FileVideoStream(args["video"]).start()
+# fileStream = True
+
 # vs = VideoStream(src=0).start()
 # vs = VideoStream(usePiCamera=True).start()
 # fileStream = False
 time.sleep(1.0)
+# import cv2
 
-# loop over frames from the video stream
+# Open the default camera (usually the first camera connected)
+cap = cv2.VideoCapture(0)
+
+# Check if the camera opened successfully
+if not cap.isOpened():
+    print("Error: Unable to open camera.")
+    exit()
+
+# Loop to read and display frames from the camera
 while True:
+    # Capture frame-by-frame
+	ret, frame = cap.read()
+# loop over frames from the video stream
+# while True:
 	# if this is a file video stream, then we need to check if
 	# there any more frames left in the buffer to process
-	if fileStream and not vs.more():
-		break
+	# if fileStream and not vs.more():
+	# 	break
 
 	# grab the frame from the threaded video file stream, resize
 	# it, and convert it to grayscale
 	# channels)
-	frame = vs.read()
+	# frame = vs.read()
 	frame = imutils.resize(frame, width=450)
 	gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
 
@@ -132,9 +146,10 @@ while True:
 			cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 0, 255), 2)
 		cv2.putText(frame, "EAR: {:.2f}".format(ear), (300, 30),
 			cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 0, 255), 2)
+		print("Blinks: {}".format(TOTAL))
  
 	# show the frame
-	cv2.imshow("Frame", frame)
+	# cv2.imshow("Frame", frame)
 	key = cv2.waitKey(1) & 0xFF
  
 	# if the `q` key was pressed, break from the loop
@@ -143,4 +158,4 @@ while True:
 
 # do a bit of cleanup
 cv2.destroyAllWindows()
-vs.stop()
+# vs.stop()
