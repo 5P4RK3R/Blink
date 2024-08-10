@@ -89,7 +89,7 @@ if run:
         # e.g., apply filters, transformations, or object detection
 
         # Convert the frame from BGR to RGB format
-        frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+        # frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
         frame = blink.detect(frame)
 
         # Display the frame using Streamlit's st.image

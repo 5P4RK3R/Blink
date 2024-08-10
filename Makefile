@@ -45,7 +45,6 @@ run:
 	
 server:
 	mkdir -p $(OUTPUT_DIR)
-	# twistd -ny main.tac --logfile=$(OUTPUT_DIR)/main.log
 	streamlit run main.py
 	
 automate:

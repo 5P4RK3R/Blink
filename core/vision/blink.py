@@ -43,7 +43,7 @@ class Blink:
 
 
 
-    def eye_aspect_ratio(eye):
+    def eye_aspect_ratio(self,eye):
         # compute the euclidean distances between the two sets of
         # vertical eye landmarks (x, y)-coordinates
         A = dist.euclidean(eye[1], eye[5])
@@ -62,17 +62,17 @@ class Blink:
     def detect(self,frame):
         try:
             frame = imutils.resize(frame, width=450)
-            gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+            # gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
 
             # detect faces in the grayscale frame
-            rects = self.detector(gray, 0)
-
+            rects = self.detector(frame, 0)
+            # return frame
             # loop over the face detections
             for rect in rects:
                 # determine the facial landmarks for the face region, then
                 # convert the facial landmark (x, y)-coordinates to a NumPy
                 # array
-                shape = self.predictor(gray, rect)
+                shape = self.predictor(frame, rect)
                 shape = face_utils.shape_to_np(shape)
 
                 # extract the left and right eye coordinates, then use the
@@ -95,26 +95,26 @@ class Blink:
                 # check to see if the eye aspect ratio is below the blink
                 # threshold, and if so, increment the blink frame counter
                 if ear < self.EYE_AR_THRESH:
-                    COUNTER += 1
+                    self.COUNTER += 1
 
                 # otherwise, the eye aspect ratio is not below the blink
                 # threshold
                 else:
                     # if the eyes were closed for a sufficient number of
                     # then increment the total number of blinks
-                    if COUNTER >= self.EYE_AR_CONSEC_FRAMES:
-                        TOTAL += 1
+                    if self.COUNTER >= self.EYE_AR_CONSEC_FRAMES:
+                        self.TOTAL += 1
 
                     # reset the eye frame counter
-                    COUNTER = 0
+                    self.COUNTER = 0
 
                 # draw the total number of blinks on the frame along with
                 # the computed eye aspect ratio for the frame
-                # cv2.putText(frame, "Blinks: {}".format(TOTAL), (10, 30),
-                #     cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 0, 255), 2)
-                # cv2.putText(frame, "EAR: {:.2f}".format(ear), (300, 30),
-                #     cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 0, 255), 2)
+                cv2.putText(frame, "Blinks: {}".format(self.TOTAL), (10, 30),
+                    cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 0, 255), 2)
+                cv2.putText(frame, "EAR: {:.2f}".format(ear), (300, 30),
+                    cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 0, 255), 2)
                 # print("Blinks: {}".format(TOTAL))
-                return frame
+            return frame
         except Exception as e:
             print_exc(e)
