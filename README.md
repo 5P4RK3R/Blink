@@ -1,2 +1,2 @@
 # Blink
-A Eye Blink Game made with Beeware
+A Eye Blink Game 
