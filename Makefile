@@ -24,7 +24,9 @@ all: install run upload
 install:
 	$(PYTHON) -m venv $(VENV)
 	. $(VENV)/bin/activate && $(PIP) install -r requirements.txt
-	. $(VENV)/bin/activate
+
+uninstall:
+	rm -rf $(VENV)
 
 # Clean the project
 clean:
