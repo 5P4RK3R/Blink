@@ -57,10 +57,8 @@
 # if __name__ == "__main__":
 #     main()
 import os
-import cv2
 import streamlit as st
 import numpy as np
-import tempfile
 
 from core.vision.blink import Blink
 from streamlit_webrtc import webrtc_streamer
