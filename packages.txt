@@ -5,9 +5,9 @@ libboost-all-dev
 freeglut3-dev
 cmake
 gnupg
-cuda
 libopenblas-dev
 libpng-dev 
 libbrotli-dev 
 liblzma-dev
 libjxl-dev
+cuda
