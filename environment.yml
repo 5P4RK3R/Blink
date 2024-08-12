@@ -7,3 +7,4 @@ dependencies:
      - opencv
      - watchdog 
      - imutils
+     - streamlit_webrtc
