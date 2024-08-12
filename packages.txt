@@ -9,3 +9,4 @@ libopenblas-dev
 libpng-dev 
 libbrotli-dev 
 liblzma-dev
+libjxl-tools
