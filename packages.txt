@@ -5,3 +5,4 @@ libboost-all-dev
 freeglut3-dev
 cmake
 libopenblas-dev
+libjxl-dev
