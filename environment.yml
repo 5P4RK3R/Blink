@@ -4,5 +4,7 @@ dependencies:
      - dlib
      - numpy
      - scipy
-     - opencv
-     - face_recognition
+     - opencv-python
+     - streamlit  
+     - watchdog 
+     - imutils
