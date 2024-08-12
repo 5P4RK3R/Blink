@@ -4,6 +4,6 @@ dependencies:
      - dlib
      - numpy
      - scipy
-     - opencv-python
+     - opencv
      - watchdog 
      - imutils
