@@ -43,9 +43,3 @@ typing_extensions==4.12.2
 tzdata==2024.1
 urllib3==2.2.2
 watchdog==4.0.1
-build-essential
-libgtk-3-dev
-libboost-all-dev
-freeglut3-dev
-cmake
-libopenblas-dev
