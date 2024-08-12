@@ -61,7 +61,10 @@ import cv2
 import streamlit as st
 import numpy as np
 import tempfile
+
 from core.vision.blink import Blink
+from streamlit_webrtc import webrtc_streamer
+
 # Use this line to capture video from the webcam
 # cap = cv2.VideoCapture(0)
 
@@ -72,33 +75,36 @@ run = st.checkbox('Run')
 
 # Add a "Stop" button and store its state in a variable
 stop = st.button("Stop")
+# if run:
+#     blink = Blink(predictor="shape_predictor_68_face_landmarks.dat")
+#     # video = st.empty()
+#     FRAME = st.image([])
+
+
+#     while blink.cap.isOpened() and not stop:
+#         ret, frame = blink.cap.read()
+
+#         if not ret:
+#             st.write("The video capture has ended.")
+#             break
+
+#         # You can process the frame here if needed
+#         # e.g., apply filters, transformations, or object detection
+
+#         # Convert the frame from BGR to RGB format
+#         # frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+#         frame = blink.detect(frame)
+
+#         # Display the frame using Streamlit's st.image
+#         # video.image(frame, channels="RGB")
+#         FRAME.image(frame)
+
+#         # Break the loop if the 'q' key is pressed or the user clicks the "Stop" button
+#         if cv2.waitKey(1) & 0xFF == ord("q") or stop: 
+#             break
+
+#     blink.cap.release()
+#     cv2.destroyAllWindows()
 if run:
     blink = Blink(predictor="shape_predictor_68_face_landmarks.dat")
-    # video = st.empty()
-    FRAME = st.image([])
-
-
-    while blink.cap.isOpened() and not stop:
-        ret, frame = blink.cap.read()
-
-        if not ret:
-            st.write("The video capture has ended.")
-            break
-
-        # You can process the frame here if needed
-        # e.g., apply filters, transformations, or object detection
-
-        # Convert the frame from BGR to RGB format
-        # frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
-        frame = blink.detect(frame)
-
-        # Display the frame using Streamlit's st.image
-        # video.image(frame, channels="RGB")
-        FRAME.image(frame)
-
-        # Break the loop if the 'q' key is pressed or the user clicks the "Stop" button
-        if cv2.waitKey(1) & 0xFF == ord("q") or stop: 
-            break
-
-    blink.cap.release()
-    cv2.destroyAllWindows()
+    webrtc_streamer(key="Blink", video_frame_callback=blink.detect)
