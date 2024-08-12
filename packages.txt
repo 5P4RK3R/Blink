@@ -8,3 +8,6 @@ gnupg
 cuda
 libopenblas-dev
 libjxl-dev
+libpng-dev 
+libbrotli-dev 
+liblzma-dev
