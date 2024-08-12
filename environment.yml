@@ -5,6 +5,5 @@ dependencies:
      - numpy
      - scipy
      - opencv-python
-     - streamlit  
      - watchdog 
      - imutils
